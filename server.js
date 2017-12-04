@@ -20,7 +20,9 @@ var port = process.env.PORT || 3000;
 // Initialize Express
 var app = express();
 
+var MONGODB_URI = "mongodb://heroku_1f70ljt0:44kepupk4aov6d4t0h8n6m7d3u@ds129066.mlab.com:29066/heroku_1f70ljt0";
 // Configure middleware
+var databaseUri = "mongodb://localhost/broncosHw";
 
 // Use morgan logger for logging requests
 app.use(logger("dev"));
@@ -32,9 +34,15 @@ app.use(express.static("public"));
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/broncosHw", {
-  useMongoClient: true
-});
+// mongoose.connect("mongodb://localhost/broncosHw", {
+//   useMongoClient: true
+// });
+
+if(process.env.MONGODB_URI){
+  mongoose.connect(process.env.MONGODB_URI);
+} else {
+  mongoose.connect(databaseUri,{useMongoClient: true});
+}
 
 // Routes
 
