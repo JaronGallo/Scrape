@@ -11,8 +11,8 @@ var cheerio = require("cheerio");
 
 // Require all models
 var db = require("./models");
-var Article = require("./models/Article");
-var Note = require("./models/Note");
+var Article = require("./models/Article.js");
+var Note = require("./models/Note.js");
 
 
 var port = process.env.PORT || 3000;
